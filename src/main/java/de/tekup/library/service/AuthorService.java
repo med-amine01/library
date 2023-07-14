@@ -28,9 +28,11 @@ public class AuthorService {
 
     public Author updateAuthor(Long id, Author author) {
         Optional<Author> optionalAuthor = authorRepository.findById(id);
+
         if (optionalAuthor.isPresent()) {
             Author existingAuthor = optionalAuthor.get();
             existingAuthor.setName(author.getName());
+
             return authorRepository.save(existingAuthor);
         } else {
             return null;

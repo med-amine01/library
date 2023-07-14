@@ -28,12 +28,14 @@ public class BookService {
 
     public Book updateBook(Long id, Book book) {
         Optional<Book> optionalBook = bookRepository.findById(id);
+
         if (optionalBook.isPresent()) {
             Book existingBook = optionalBook.get();
             existingBook.setTitle(book.getTitle());
             existingBook.setAuthor(book.getAuthor());
             existingBook.setPublisher(book.getPublisher());
             existingBook.setYearOfPublication(book.getYearOfPublication());
+
             return bookRepository.save(existingBook);
         } else {
             return null;

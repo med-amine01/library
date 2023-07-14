@@ -62,7 +62,6 @@ public class AuthorController {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    //GENERATE FAKE DATA USING FAKER
     @GetMapping("/generate/{numAuthors}/{numBooksPerAuthor}")
     public ResponseEntity<List<Author>> generateBooksAndAuthors(@PathVariable int numAuthors,
                                                                 @PathVariable int numBooksPerAuthor) {
@@ -72,6 +71,7 @@ public class AuthorController {
         for (int i = 0; i < numAuthors; i++) {
             Author author = new Author();
             author.setName(faker.book().author());
+            authorService.createAuthor(author);
 
             List<Book> books = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class AuthorController {
                 book.setTitle(faker.book().title());
                 book.setAuthor(author);
                 book.setPublisher(faker.book().publisher());
-                book.setYearOfPublication(faker.number().numberBetween(1900,2023));
+                book.setYearOfPublication(faker.number().numberBetween(1900, 2023));
                 bookService.createBook(book);
 
                 books.add(book);
@@ -90,8 +90,7 @@ public class AuthorController {
             authors.add(author);
         }
 
-        List<Author> createdAuthors = authorService.createAuthors(authors);
-
-        return new ResponseEntity<>(createdAuthors, HttpStatus.CREATED);
+        return new ResponseEntity<>(authors, HttpStatus.CREATED);
     }
+
 }
