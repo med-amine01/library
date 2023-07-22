@@ -27,6 +27,13 @@ public class AuthorController {
     private final BookService bookService;
 
     @GetMapping
+    public ResponseEntity<List<Author>> getAllAuthors() {
+        List<Author> allAuthors = authorService.getAllAuthorsWithoutPagination();
+
+        return new ResponseEntity<>(allAuthors, HttpStatus.OK);
+    }
+
+    @GetMapping(params = {"pageNumber", "pageSize"})
     public ResponseEntity<List<Author>> getAllAuthors(@RequestParam(defaultValue = "0") Integer pageNumber,
                                                       @RequestParam(defaultValue = "10") Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -34,6 +41,7 @@ public class AuthorController {
 
         return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
     }
+
 
     @GetMapping("{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
