@@ -19,6 +19,11 @@ public class AuthorService {
     public Page<Author> getAllAuthors(Pageable pageable) {
         return authorRepository.findAll(pageable);
     }
+
+    public List<Author> getAllAuthorsWithoutPagination() {
+        return authorRepository.findAll();
+    }
+
     public Optional<Author> getAuthorById(Long id) {
         return authorRepository.findById(id);
     }
