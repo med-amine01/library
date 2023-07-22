@@ -70,7 +70,7 @@ public class AuthorController {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping("/generate/{numAuthors}/{numBooksPerAuthor}")
+    @GetMapping("generate/{numAuthors}/{numBooksPerAuthor}")
     public ResponseEntity<List<Author>> generateBooksAndAuthors(@PathVariable int numAuthors,
                                                                 @PathVariable int numBooksPerAuthor) {
         Faker faker = new Faker();

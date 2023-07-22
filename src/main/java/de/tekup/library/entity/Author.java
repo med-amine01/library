@@ -9,7 +9,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import java.util.List;
 
-
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
