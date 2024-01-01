@@ -1,4 +1,4 @@
-package de.tekup.library.configuration;
+package de.tekup.library.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class CorsConfig {
     private static final String DELETE = "DELETE";
     private static final String PUT = "PUT";
     private static final String PATCH = "PATCH";
-
+    
     @Bean
     public WebMvcConfigurer corsConfigurer(){
         return  new WebMvcConfigurer() {

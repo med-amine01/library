@@ -3,8 +3,8 @@ package de.tekup.library.controller;
 import com.github.javafaker.Faker;
 import de.tekup.library.entity.Author;
 import de.tekup.library.entity.Book;
-import de.tekup.library.service.AuthorService;
-import de.tekup.library.service.BookService;
+import de.tekup.library.service.impl.AuthorService;
+import de.tekup.library.service.impl.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/authors/")
+@RequestMapping("/api/v1/authors")
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class AuthorController {
@@ -43,7 +43,7 @@ public class AuthorController {
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
         Optional<Author> optionalAuthor = authorService.getAuthorById(id);
 
@@ -58,7 +58,7 @@ public class AuthorController {
         return new ResponseEntity<>(createdAuthor, HttpStatus.CREATED);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody Author author) {
         Author updatedAuthor = authorService.updateAuthor(id, author);
 
@@ -66,7 +66,7 @@ public class AuthorController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
 
@@ -78,7 +78,7 @@ public class AuthorController {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping("generate/{numAuthors}/{numBooksPerAuthor}")
+    @GetMapping("/generate/{numAuthors}/{numBooksPerAuthor}")
     public ResponseEntity<List<Author>> generateBooksAndAuthors(@PathVariable int numAuthors,
                                                                 @PathVariable int numBooksPerAuthor) {
         Faker faker = new Faker();

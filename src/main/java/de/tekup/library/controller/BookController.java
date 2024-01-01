@@ -2,8 +2,8 @@ package de.tekup.library.controller;
 
 import de.tekup.library.entity.Author;
 import de.tekup.library.entity.Book;
-import de.tekup.library.service.AuthorService;
-import de.tekup.library.service.BookService;
+import de.tekup.library.service.impl.AuthorService;
+import de.tekup.library.service.impl.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/books/")
+@RequestMapping("/api/v1/books")
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class BookController {
@@ -25,7 +25,7 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Optional<Book> optionalBook = bookService.getBookById(id);
 
@@ -48,7 +48,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
         Book updatedBook = bookService.updateBook(id, book);
 
@@ -56,7 +56,7 @@ public class BookController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
 

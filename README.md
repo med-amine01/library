@@ -5,7 +5,6 @@ Project description goes here...
 ## Contributors
 
 - Chebbi Med Amine
-- Mahdi Oueslati
 
 ## Frontend
 

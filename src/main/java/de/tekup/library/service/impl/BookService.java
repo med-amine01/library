@@ -1,4 +1,4 @@
-package de.tekup.library.service;
+package de.tekup.library.service.impl;
 
 import de.tekup.library.entity.Book;
 import de.tekup.library.repository.BookRepository;
